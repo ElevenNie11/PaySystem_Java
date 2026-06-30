@@ -45,7 +45,7 @@ abstract class Payment{
         return true;
     }
 
-    //2026.6.30 新增：密码校验，再 pay() 中调用
+    //2026.6.30 新增：密码校验， 在pay() 中调用
     protected void checkPassword(String inputPassword){
         if(isLocked){
             throw new AccountLockedException("[支付失败]: 该账户已被锁定,请联系客服解锁...");
