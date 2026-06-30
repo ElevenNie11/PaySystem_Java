@@ -208,7 +208,11 @@ public class PaySystem{
 
         System.out.print("请输入选择序号: ");
         int choice = input.nextInt() - 1;
-        input.close();
+        // input.close();                        // Scanner 应该只在程序真正不再需要读取输入的时候关闭一次,而不是用一次就关一次
+        
+        //2026.6.30新增：nextInt() nextDouble() 和 nextLine() 混用时要注意[换行符]的问题！！
+        input.nextLine();   //用处： 吃掉nextInt()回车以后残留下来的换行符，避免被下一个 nextLine() 读到导致程序以为用户第一次输入的密码是一个空白行
+
 
         //2026.6.30 新增：让用户输入支付密码
         while(!paySuccess){
