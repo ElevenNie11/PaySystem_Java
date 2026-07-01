@@ -39,15 +39,17 @@ public class Alipay extends Payment{
 
     //2026.7.1 新增：从文件里读取余额，文件不存在则返回 PaySystem.java 里设置的默认值同时创建文件
     private static double loadBalance(double defaultBalance){
-        File file = new File(FilePath);
+        File file = new File(FilePath);        //这保存着文件的各种属性
         if(!file.exists()){
             //第一次运行文件不存在，直接写入默认值
             writeBalance(defaultBalance);
             return defaultBalance;
         }
         //文件存在，则读取里面的余额
+        // try-with-resources
+        // Scanner 类用于读取输入源的数据（输入源包括：键盘/文件等）
         try(Scanner fileReader = new Scanner(file)){
-            if(fileReader.hasNextDouble()){
+            if(fileReader.hasNextDouble()){         //先检查：下一个 token 是合法的 double 类型
                 return fileReader.nextDouble();
             }
         }catch(FileNotFoundException sth){          //理论上不会走到这里,因为前面已经判断过 file.exists()
